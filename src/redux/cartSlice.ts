@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from './store';
 
 type StateType = {
   products: {id: number; count: number}[];
@@ -14,33 +15,34 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<number>) => {
-      const tmp = state.products;
       const existingProduct = state.products.findIndex(
         item => item.id === action.payload,
       );
       if (existingProduct !== -1) {
-        tmp[existingProduct].count += 1;
-        state.products = tmp;
+        state.products[existingProduct].count += 1;
       } else {
-        tmp.push({id: action.payload, count: 1});
+        state.products.push({id: action.payload, count: 1});
       }
-      state.products = tmp;
     },
     remove: (state, action: PayloadAction<number>) => {
-      const tmp = state.products;
       const existingProduct = state.products.findIndex(
         item => item.id === action.payload,
       );
-      if (tmp[existingProduct].count > 1) {
-        tmp[existingProduct].count -= 1;
-        state.products = tmp;
+      if (state.products[existingProduct].count > 1) {
+        state.products[existingProduct].count -= 1;
       } else {
-        state.products = tmp.filter(el => el.id !== action.payload);
+        state.products = state.products.filter(el => el.id !== action.payload);
       }
     },
   },
 });
 
 export const {add, remove} = cartSlice.actions;
+
+export const selectCartCount = (state: RootState) =>
+  state.cart.products.length &&
+  state.cart.products?.reduce((acc, item) => acc + item.count, 0);
+
+export const selectCart = (state: RootState) => state.cart;
 
 export default cartSlice.reducer;

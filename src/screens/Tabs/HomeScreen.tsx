@@ -6,21 +6,24 @@ import styled from 'styled-components/native';
 import {useGetAllProductsQuery} from '../../services/productsApi';
 import {add} from '../../redux/cartSlice';
 import {useAppDispatch} from '../../utils/hooks';
-import {TabBarProps} from '../../routes/router';
+import {TabBarProps} from '../../types';
 
 const Container = styled.SafeAreaView`
   background-color: ${({theme}) => theme.palette.bg1};
 `;
 
 export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
-  const {data} = useGetAllProductsQuery();
+  const {data, isLoading} = useGetAllProductsQuery();
   const dispatch = useAppDispatch();
 
   return (
     <Container>
-      {data && (
+      {!isLoading && (
         <FlatList
           data={data}
+          columnWrapperStyle={{
+            justifyContent: 'center',
+          }}
           renderItem={({item}) => (
             <Product
               image={item.image}
@@ -29,7 +32,6 @@ export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
               onPress={() =>
                 navigation.navigate('ProductDetails', {id: item.id})
               }
-              id={item.id}
               onBuy={() => dispatch(add(item.id))}
             />
           )}

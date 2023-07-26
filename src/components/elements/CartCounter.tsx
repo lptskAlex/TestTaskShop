@@ -5,14 +5,14 @@ import {Text} from '../typography/Text';
 import {CartIcon} from '../icons/CartIcon';
 
 import {useAppSelector} from '../../utils/hooks';
-import {selectCartCount} from '../../redux/selectors';
+import {selectCartCount} from '../../redux/cartSlice';
 
 const Container = styled.View`
   height: 30px;
   width: 30px;
 `;
 
-const Number = styled(Text)`
+const Number = styled.View`
   text-align: center;
   line-height: 20px;
   width: 20px;
@@ -31,7 +31,13 @@ export const CartCounter = () => {
   const cartCount = useAppSelector(selectCartCount);
   return (
     <Container>
-      {cartCount ? <Number>{cartCount}</Number> : <></>}
+      {cartCount ? (
+        <Number>
+          <Text color="text2">{cartCount}</Text>
+        </Number>
+      ) : (
+        <></>
+      )}
       <CartIcon />
     </Container>
   );

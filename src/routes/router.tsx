@@ -3,11 +3,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
-import {CompositeScreenProps} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   CartScreen,
   FavouriteScreen,
@@ -18,34 +14,20 @@ import {
 import {FavouriteIcon, HomeIcon, SearchIcon} from '../components/icons';
 import {CartCounter} from '../components/elements/CartCounter';
 import {Header} from '../components/common/Header';
-
-type MainStackParams = {
-  TabBar: undefined;
-  ProductDetails: {id: number};
-};
-
-type TabBarParams = {
-  Home: undefined;
-  Search: undefined;
-  Favourite: undefined;
-  Cart: undefined;
-};
-export type TabBarProps<T extends keyof TabBarParams> = CompositeScreenProps<
-  BottomTabScreenProps<TabBarParams, T>,
-  NativeStackScreenProps<MainStackParams, keyof MainStackParams>
->;
+import {MainStackParams, TabBarParams} from '../types';
 
 const BottomTab = createBottomTabNavigator<TabBarParams>();
-const Main = createNativeStackNavigator<MainStackParams>();
-
-export type MainStackScreenProps<RouteName extends keyof MainStackParams> =
-  NativeStackScreenProps<MainStackParams, RouteName>;
+const Main = createStackNavigator<MainStackParams>();
 
 const BottomTabStack = () => {
   return (
     <BottomTab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarActiveBackgroundColor: '#CCCCCC',
+        tabBarItemStyle: {
+          borderRadius: 10,
+        },
         tabBarStyle: {
           borderRadius: 10,
           margin: 10,
@@ -97,7 +79,7 @@ export const MainStack = () => {
       />
       <Main.Screen
         options={{
-          header: () => <Header />,
+          header: Header,
         }}
         name="ProductDetails"
         component={ProductDetailsScreen}

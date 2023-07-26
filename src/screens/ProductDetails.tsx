@@ -7,9 +7,9 @@ import {Text} from '../components/typography/Text';
 import {add} from '../redux/cartSlice';
 import {useAppDispatch} from '../utils/hooks';
 import {useGetAllProductsQuery} from '../services/productsApi';
-import {MainStackScreenProps} from '../routes/router';
+import {MainStackScreenProps} from '../types';
 
-const Container = styled.SafeAreaView`
+const Container = styled.ScrollView`
   background-color: ${({theme}) => theme.palette.bg1};
   flex: 1;
   padding: ${({theme}) => theme.sizes.base}px;
@@ -34,7 +34,7 @@ export const ProductDetailsScreen = ({
   route,
 }: MainStackScreenProps<'ProductDetails'>) => {
   const {data} = useGetAllProductsQuery();
-  const product = data?.filter(el => el.id === route.params.id)[0];
+  const product = data?.find(el => el.id === route.params.id);
   const dispatch = useAppDispatch();
   return (
     <Container>

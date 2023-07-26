@@ -90,7 +90,12 @@ export const CartItem = ({
           {title}
         </Text>
         <Text>{category}</Text>
-        <Text weight="bold">${price * count}</Text>
+        <Text weight="bold">
+          $
+          {(price * count).toLocaleString(_, {
+            maximumFractionDigits: 2,
+          })}
+        </Text>
       </DescriptionContainer>
     </Container>
   );
