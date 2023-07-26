@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {Image, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
-import {Text} from '../../../components/typography/Text';
+import {Text} from '../typography/Text';
 
 const Container = styled.TouchableOpacity`
   background-color: ${({theme}) => theme.palette.bg2};
@@ -29,10 +28,8 @@ export const Product = ({
   title,
   price,
   onBuy,
-  id,
   onPress,
 }: ProductProps) => {
-  const navigation = useNavigation();
   return (
     <Container onPress={onPress}>
       <Image

@@ -1,11 +1,10 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {Product} from './components/Product';
+import {Product} from '../../components/common/Product';
 import styled from 'styled-components/native';
 
 import {useGetAllProductsQuery} from '../../services/productsApi';
 import {add} from '../../redux/cartSlice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAppDispatch} from '../../utils/hooks';
 import {TabBarProps} from '../../routes/router';
 
@@ -14,10 +13,8 @@ const Container = styled.SafeAreaView`
 `;
 
 export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
-  const {data} = useGetAllProductsQuery({});
+  const {data} = useGetAllProductsQuery();
   const dispatch = useAppDispatch();
-
-  AsyncStorage.setItem('a', 'a');
 
   return (
     <Container>
@@ -36,6 +33,7 @@ export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
               onBuy={() => dispatch(add(item.id))}
             />
           )}
+          keyExtractor={item => item.id.toString()}
           numColumns={2}
         />
       )}

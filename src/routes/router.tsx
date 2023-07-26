@@ -8,16 +8,16 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {CompositeScreenProps} from '@react-navigation/native';
-
-import {HomeScreen} from '../screens/Home/HomeScreen';
-import {SearchScreen} from '../screens/Search/SearchScreen';
-import {FavouriteScreen} from '../screens/Favourite/FavouriteScreen';
-import {CartScreen} from '../screens/Cart/CartScreen';
-import {HomeIcon} from '../components/icons/HomeIcon';
-import {SearchIcon} from '../components/icons/SearchIcon';
-import {FavouriteIcon} from '../components/icons/FavouriteIcon';
-import {ProductDetailsScreen} from '../screens/ProductDetails/ProductDetails';
+import {
+  CartScreen,
+  FavouriteScreen,
+  HomeScreen,
+  ProductDetailsScreen,
+  SearchScreen,
+} from '../screens';
+import {FavouriteIcon, HomeIcon, SearchIcon} from '../components/icons';
 import {CartCounter} from '../components/elements/CartCounter';
+import {Header} from '../components/common/Header';
 
 type MainStackParams = {
   TabBar: undefined;
@@ -88,12 +88,15 @@ const BottomTabStack = () => {
 
 export const MainStack = () => {
   return (
-    <Main.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
+    <Main.Navigator>
       <Main.Screen name="TabBar" component={BottomTabStack} />
-      <Main.Screen name="ProductDetails" component={ProductDetailsScreen} />
+      <Main.Screen
+        options={{
+          header: () => <Header />,
+        }}
+        name="ProductDetails"
+        component={ProductDetailsScreen}
+      />
     </Main.Navigator>
   );
 };

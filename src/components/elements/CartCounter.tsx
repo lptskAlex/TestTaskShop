@@ -7,8 +7,8 @@ import {CartIcon} from '../icons/CartIcon';
 import {useAppSelector} from '../../utils/hooks';
 
 const Container = styled.View`
-  height: 30;
-  width: 30;
+  height: 30px;
+  width: 30px;
 `;
 
 const Number = styled(Text)`
@@ -34,7 +34,7 @@ export const CartCounter = () => {
   );
   return (
     <Container>
-      {cartCount && <Number>{cartCount}</Number>}
+      {cartCount ? <Number>{cartCount}</Number> : <></>}
       <CartIcon />
     </Container>
   );

@@ -2,10 +2,10 @@ import React from 'react';
 import {View} from 'react-native';
 import {styled} from 'styled-components/native';
 
-import {Text} from '../../../components/typography/Text';
+import {Text} from '../typography/Text';
 
-import {add, remove} from '../../../redux/cartSlice';
-import {useAppDispatch} from '../../../utils/hooks';
+import {useAppDispatch} from '../../utils/hooks';
+import {add, remove} from '../../redux/cartSlice';
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
@@ -17,7 +17,6 @@ const Container = styled.TouchableOpacity`
 const Controls = styled.View`
   flex-direction: row;
   border-color: black;
-  flex: 1;
   border-width: 1px;
   margin: 0 ${({theme}) => theme.sizes.lg}px;
   align-items: center;

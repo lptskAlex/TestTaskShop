@@ -2,12 +2,12 @@ import React from 'react';
 import {Image} from 'react-native';
 import {styled} from 'styled-components/native';
 
-import {Text} from '../../components/typography/Text';
+import {Text} from '../components/typography/Text';
 
-import {add} from '../../redux/cartSlice';
-import {useAppDispatch} from '../../utils/hooks';
-import {useGetAllProductsQuery} from '../../services/productsApi';
-import {MainStackScreenProps} from '../../routes/router';
+import {add} from '../redux/cartSlice';
+import {useAppDispatch} from '../utils/hooks';
+import {useGetAllProductsQuery} from '../services/productsApi';
+import {MainStackScreenProps} from '../routes/router';
 
 const Container = styled.SafeAreaView`
   background-color: ${({theme}) => theme.palette.bg1};
@@ -33,7 +33,7 @@ const BuyBtn = styled.TouchableOpacity`
 export const ProductDetailsScreen = ({
   route,
 }: MainStackScreenProps<'ProductDetails'>) => {
-  const {data} = useGetAllProductsQuery({});
+  const {data} = useGetAllProductsQuery();
   const product = data?.filter(el => el.id === route.params.id)[0];
   const dispatch = useAppDispatch();
   return (

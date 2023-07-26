@@ -1,13 +1,13 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import {styled} from 'styled-components/native';
+
+import {CartItem} from '../../components/common/CartItem';
+import {Text} from '../../components/typography/Text';
+
 import {useGetAllProductsQuery} from '../../services/productsApi';
-
-import {CartItem} from './components/CartItem';
-
 import {useAppSelector} from '../../utils/hooks';
 import {TabBarProps} from '../../routes/router';
-import {Text} from '../../components/typography/Text';
 
 const Container = styled.SafeAreaView`
   background-color: ${({theme}) => theme.palette.bg1};
@@ -15,7 +15,8 @@ const Container = styled.SafeAreaView`
 
 export const CartScreen = ({navigation}: TabBarProps<'Cart'>) => {
   const cart = useAppSelector(state => state.cart);
-  const {data: products, isLoading} = useGetAllProductsQuery({});
+  const {data: products, isLoading} = useGetAllProductsQuery();
+  console.log(cart);
   return (
     <Container>
       <FlatList
@@ -40,6 +41,7 @@ export const CartScreen = ({navigation}: TabBarProps<'Cart'>) => {
             <></>
           );
         }}
+        keyExtractor={item => item.id.toString()}
       />
     </Container>
   );
