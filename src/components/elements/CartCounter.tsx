@@ -5,6 +5,7 @@ import {Text} from '../typography/Text';
 import {CartIcon} from '../icons/CartIcon';
 
 import {useAppSelector} from '../../utils/hooks';
+import {selectCartCount} from '../../redux/selectors';
 
 const Container = styled.View`
   height: 30px;
@@ -27,11 +28,7 @@ const Number = styled(Text)`
 `;
 
 export const CartCounter = () => {
-  const cartCount = useAppSelector(
-    state =>
-      state.cart.products.length &&
-      state.cart.products?.reduce((a, b) => a + b.count, 0),
-  );
+  const cartCount = useAppSelector(selectCartCount);
   return (
     <Container>
       {cartCount ? <Number>{cartCount}</Number> : <></>}

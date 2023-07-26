@@ -5,6 +5,7 @@ const palette = {
   text1: '#000000',
   text2: '#FFF',
   textBuy: 'green',
+  sumText: '#3832A8',
 };
 
 const sizes = {

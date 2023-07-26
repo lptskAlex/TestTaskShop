@@ -1,20 +1,24 @@
 import React from 'react';
 import {styled} from 'styled-components/native';
-import {ArrowLeft} from '../icons/ArrowLeft';
 import {useNavigation} from '@react-navigation/native';
+import {TouchableOpacity} from 'react-native';
 
-const Container = styled.TouchableOpacity`
+import {ArrowLeft} from '../icons/ArrowLeft';
+
+const Container = styled.View`
   height: 50px;
   width: 100%;
   justify-content: center;
   padding: ${({theme}) => theme.sizes.base}px;
-  background-color: ${({theme}) => theme.palette.bg1};
+  background-color: ${({theme}) => theme.palette.bg2};
 `;
 export const Header = () => {
   const navigation = useNavigation();
   return (
-    <Container onPress={() => navigation.goBack()}>
-      <ArrowLeft />
+    <Container>
+      <TouchableOpacity onPress={navigation.goBack}>
+        <ArrowLeft />
+      </TouchableOpacity>
     </Container>
   );
 };

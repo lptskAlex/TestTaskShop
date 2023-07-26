@@ -19,7 +19,6 @@ type ProductProps = {
   title: string;
   price: number;
   onBuy: () => void;
-  id: number;
   onPress: () => void;
 };
 

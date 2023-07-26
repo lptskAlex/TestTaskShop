@@ -46,7 +46,6 @@ const BottomTabStack = () => {
     <BottomTab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
-        headerShown: false,
         tabBarStyle: {
           borderRadius: 10,
           margin: 10,
@@ -89,7 +88,13 @@ const BottomTabStack = () => {
 export const MainStack = () => {
   return (
     <Main.Navigator>
-      <Main.Screen name="TabBar" component={BottomTabStack} />
+      <Main.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="TabBar"
+        component={BottomTabStack}
+      />
       <Main.Screen
         options={{
           header: () => <Header />,

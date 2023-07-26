@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {styled} from 'styled-components/native';
 
 import {CartItem} from '../../components/common/CartItem';
@@ -8,15 +8,20 @@ import {Text} from '../../components/typography/Text';
 import {useGetAllProductsQuery} from '../../services/productsApi';
 import {useAppSelector} from '../../utils/hooks';
 import {TabBarProps} from '../../routes/router';
+import {selectCart} from '../../redux/selectors';
 
 const Container = styled.SafeAreaView`
   background-color: ${({theme}) => theme.palette.bg1};
+  flex: 1;
 `;
 
 export const CartScreen = ({navigation}: TabBarProps<'Cart'>) => {
-  const cart = useAppSelector(state => state.cart);
+  const cart = useAppSelector(selectCart);
   const {data: products, isLoading} = useGetAllProductsQuery();
-  console.log(cart);
+  const sum = cart.products.reduce(
+    (a, b) => a + b.count * (products?.find(el => el.id === b.id)?.price || 0),
+    0,
+  );
   return (
     <Container>
       <FlatList
@@ -43,6 +48,10 @@ export const CartScreen = ({navigation}: TabBarProps<'Cart'>) => {
         }}
         keyExtractor={item => item.id.toString()}
       />
+
+      <Text align="right" weight="bold" size="xl" color="sumText">
+        ${sum}
+      </Text>
     </Container>
   );
 };

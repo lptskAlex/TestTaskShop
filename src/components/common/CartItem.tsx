@@ -90,7 +90,7 @@ export const CartItem = ({
           {title}
         </Text>
         <Text>{category}</Text>
-        <Text weight="bold">${price}</Text>
+        <Text weight="bold">${price * count}</Text>
       </DescriptionContainer>
     </Container>
   );
