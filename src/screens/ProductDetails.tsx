@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {styled} from 'styled-components/native';
 
 import {Text} from '../components/typography/Text';
@@ -13,8 +13,6 @@ const Container = styled.ScrollView`
   background-color: ${({theme}) => theme.palette.bg1};
   flex: 1;
   padding: ${({theme}) => theme.sizes.base}px;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const Description = styled(Text)`
@@ -37,7 +35,7 @@ export const ProductDetailsScreen = ({
   const product = data?.find(el => el.id === route.params.id);
   const dispatch = useAppDispatch();
   return (
-    <Container>
+    <Container contentContainerStyle={styles.contentContainer}>
       {product && (
         <>
           <Image
@@ -62,3 +60,10 @@ export const ProductDetailsScreen = ({
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
