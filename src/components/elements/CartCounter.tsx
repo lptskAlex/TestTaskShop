@@ -13,14 +13,13 @@ const Container = styled.View`
 `;
 
 const Number = styled.View`
-  text-align: center;
-  line-height: 20px;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   border-radius: 10px;
   background-color: ${({theme}) => theme.palette.black};
   position: absolute;
-  font-size: 10px;
   color: ${({theme}) => theme.palette.text2};
   left: 15px;
   bottom: 15px;
@@ -31,12 +30,12 @@ export const CartCounter = () => {
   const cartCount = useAppSelector(selectCartCount);
   return (
     <Container>
-      {cartCount ? (
+      {!!cartCount && (
         <Number>
-          <Text color="text2">{cartCount}</Text>
+          <Text lineHeight="sm" color="text2">
+            {cartCount}
+          </Text>
         </Number>
-      ) : (
-        <></>
       )}
       <CartIcon />
     </Container>

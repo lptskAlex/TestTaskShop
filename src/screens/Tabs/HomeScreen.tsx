@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {Product} from '../../components/common/Product';
 import styled from 'styled-components/native';
 
@@ -21,9 +21,7 @@ export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
       {!isLoading && (
         <FlatList
           data={data}
-          columnWrapperStyle={{
-            justifyContent: 'center',
-          }}
+          columnWrapperStyle={styles.columnWrapper}
           renderItem={({item}) => (
             <Product
               image={item.image}
@@ -42,3 +40,9 @@ export const HomeScreen = ({navigation}: TabBarProps<'Home'>) => {
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  columnWrapper: {
+    justifyContent: 'center',
+  },
+});

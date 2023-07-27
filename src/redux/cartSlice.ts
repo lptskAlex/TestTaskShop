@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
 export const {add, remove} = cartSlice.actions;
 
 export const selectCartCount = (state: RootState) =>
-  state.cart.products?.reduce((acc, item) => acc + item.count, 0);
+  state.cart.products.reduce((acc, item) => acc + item.count, 0);
 
 export const selectCart = (state: RootState) => state.cart;
 

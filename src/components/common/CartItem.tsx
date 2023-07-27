@@ -92,7 +92,7 @@ export const CartItem = ({
         <Text>{category}</Text>
         <Text weight="bold">
           $
-          {(price * count).toLocaleString(_, {
+          {(price * count).toLocaleString('en-EU', {
             maximumFractionDigits: 2,
           })}
         </Text>
